@@ -2,6 +2,8 @@ package com.ggomes.api_rest_desafio_picpay.entities;
 
 import java.time.LocalDateTime;
 
+import com.ggomes.api_rest_desafio_picpay.entities.enums.TransactionStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

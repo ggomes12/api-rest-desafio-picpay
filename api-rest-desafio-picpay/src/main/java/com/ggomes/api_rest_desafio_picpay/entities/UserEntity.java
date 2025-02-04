@@ -1,6 +1,8 @@
 package com.ggomes.api_rest_desafio_picpay.entities;
 
 
+import com.ggomes.api_rest_desafio_picpay.entities.enums.UserType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
