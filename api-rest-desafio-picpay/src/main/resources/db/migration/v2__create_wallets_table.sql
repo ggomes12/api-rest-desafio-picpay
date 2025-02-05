@@ -1,0 +1,6 @@
+CREATE TABLE wallets (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL UNIQUE,
+    balance DECIMAL(15,2) NOT NULL DEFAULT 0,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
