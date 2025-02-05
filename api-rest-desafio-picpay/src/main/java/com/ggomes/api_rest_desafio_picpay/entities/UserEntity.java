@@ -27,10 +27,10 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(name = "cpf_cnpj", nullable = false, unique = true, length = 20)
     private String cpfCnpj;
 
     @Column(nullable = false, unique = true)

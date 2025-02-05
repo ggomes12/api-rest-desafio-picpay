@@ -6,53 +6,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class WalletService {
-	
     @Autowired
     private WalletRepository walletRepository;
 
-    
-    public Optional<WalletEntity> findByUserId(Long userId) {
-        return walletRepository.findByUserId(userId);
-    }
-
-    
-    
     public WalletEntity save(WalletEntity wallet) {
         return walletRepository.save(wallet);
     }
 
-    
-    
+    public Optional<WalletEntity> findByUserId(Long userId) {
+        return walletRepository.findByUserId(userId);
+    }
+
+    public List<WalletEntity> findAll() {
+        return walletRepository.findAll();
+    }
+
     public boolean hasSufficientBalance(Long userId, BigDecimal amount) {
-    	
         return walletRepository.findByUserId(userId)
-                .map(wallet -> new BigDecimal(wallet.getBalance()).compareTo(amount) >= 0)
+                .map(wallet -> wallet.getBalance().compareTo(amount) >= 0)
                 .orElse(false);
     }
 
-    public void deductBalance(Long userId, BigDecimal amount) {
-    	
+    public void updateBalance(Long userId, BigDecimal amount, boolean isCredit) {
         walletRepository.findByUserId(userId).ifPresent(wallet -> {
-            BigDecimal currentBalance = new BigDecimal(wallet.getBalance());
-            wallet.setBalance(currentBalance.subtract(amount).doubleValue());
+            if (isCredit) {
+                wallet.setBalance(wallet.getBalance().add(amount));
+            } else {
+                wallet.setBalance(wallet.getBalance().subtract(amount));
+            }
             walletRepository.save(wallet);
         });
     }
-
-    
-    
-    public void addBalance(Long userId, BigDecimal amount) {
-    	
-        walletRepository.findByUserId(userId).ifPresent(wallet -> {
-            BigDecimal currentBalance = new BigDecimal(wallet.getBalance());
-            wallet.setBalance(currentBalance.add(amount).doubleValue());
-            walletRepository.save(wallet);
-        });
-    }
-    
-    
 }

@@ -1,6 +1,8 @@
 package com.ggomes.api_rest_desafio_picpay.entities;
 
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,5 +32,5 @@ public class WalletEntity {
     private UserEntity user;
 
     @Column(nullable = false)
-    private Double balance;
+    private BigDecimal balance;
 }

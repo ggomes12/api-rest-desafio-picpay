@@ -1,5 +1,6 @@
 package com.ggomes.api_rest_desafio_picpay.entities;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import com.ggomes.api_rest_desafio_picpay.entities.enums.TransactionStatus;
@@ -32,7 +33,7 @@ public class TransactionEntity {
     private Long id;
 
     @Column(nullable = false)
-    private Double amount;
+    private BigDecimal amount;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -47,5 +48,5 @@ public class TransactionEntity {
     private UserEntity payee;
 
     @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime timestamp = LocalDateTime.now();
 }
