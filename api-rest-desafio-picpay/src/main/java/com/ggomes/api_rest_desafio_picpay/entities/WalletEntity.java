@@ -28,9 +28,9 @@ public class WalletEntity {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     private UserEntity user;
 
     @Column(nullable = false)
-    private BigDecimal balance;
+    private BigDecimal balance = BigDecimal.ZERO;
 }

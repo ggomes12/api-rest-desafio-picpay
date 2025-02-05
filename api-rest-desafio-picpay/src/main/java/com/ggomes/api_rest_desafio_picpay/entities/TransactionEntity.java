@@ -48,5 +48,5 @@ public class TransactionEntity {
     private UserEntity payee;
 
     @Column(nullable = false, updatable = false)
-    private LocalDateTime timestamp = LocalDateTime.now();
+    private LocalDateTime createdAt = LocalDateTime.now();
 }
