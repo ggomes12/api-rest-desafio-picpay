@@ -1,6 +1,7 @@
 package com.ggomes.api_rest_desafio_picpay.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +61,13 @@ public class TransactionService {
                 .collect(Collectors.toList());
     }
     
+    
+    public Optional<TransactionEntity> findById(Long id) {
+        return transactionRepository.findById(id);
+    }
 
-    private TransactionResponseDTO convertToDTO(TransactionEntity transaction) {
+
+    public TransactionResponseDTO convertToDTO(TransactionEntity transaction) {
         TransactionResponseDTO dto = new TransactionResponseDTO();
         dto.setId(transaction.getId());
         dto.setAmount(transaction.getAmount());
