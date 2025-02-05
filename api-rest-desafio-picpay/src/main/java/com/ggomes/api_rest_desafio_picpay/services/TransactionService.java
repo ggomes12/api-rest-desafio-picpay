@@ -7,12 +7,14 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ggomes.api_rest_desafio_picpay.dtos.TransactionRequestDTO;
 import com.ggomes.api_rest_desafio_picpay.dtos.TransactionResponseDTO;
 import com.ggomes.api_rest_desafio_picpay.entities.TransactionEntity;
 import com.ggomes.api_rest_desafio_picpay.entities.UserEntity;
 import com.ggomes.api_rest_desafio_picpay.entities.enums.TransactionStatus;
+import com.ggomes.api_rest_desafio_picpay.entities.enums.UserType;
 import com.ggomes.api_rest_desafio_picpay.repositories.TransactionRepository;
 import com.ggomes.api_rest_desafio_picpay.repositories.UserRepository;
 
@@ -30,8 +32,16 @@ public class TransactionService {
 
     @Autowired
     private UserRepository userRepository;
+    
+    
+    @Autowired
+    private AuthorizationService authorizationService;
+    
+    @Autowired
+    private NotificationService notificationService;
+    
 
-
+    @Transactional
     public TransactionResponseDTO createTransaction(TransactionRequestDTO transactionDTO) {
     	
         log.info("Processing transaction from payer ID: {} to payee ID: {}", transactionDTO.getPayerId(), transactionDTO.getPayeeId());
@@ -47,12 +57,28 @@ public class TransactionService {
                     log.error("Payee not found with ID: {}", transactionDTO.getPayeeId());
                     return new RuntimeException("Payee not found");
                 });
+        
+        if (payer.getType() == UserType.MERCHANT) {
+        	log.warn("Merchant users cannot send money.");
+            throw new RuntimeException("MERCHANT users cannot send money.");
+        }
+        
 
         if (!walletService.hasSufficientBalance(payer.getId(), transactionDTO.getAmount())) {
             log.error("Insufficient balance for payer ID: {}", payer.getId());
             throw new RuntimeException("Insufficient balance for transaction");
         }
+        
 
+
+        log.info("Checking external authorization service...");
+        if (!authorizationService.isTransactionAuthorized()) {
+            log.warn("Transaction was not authorized by external service.");
+            throw new RuntimeException("Transaction not authorized.");
+        }
+        
+
+        log.info("Processing transaction...");
         walletService.updateBalance(payer.getId(), transactionDTO.getAmount(), false);
         walletService.updateBalance(payee.getId(), transactionDTO.getAmount(), true);
 
@@ -64,6 +90,9 @@ public class TransactionService {
 
         TransactionEntity savedTransaction = transactionRepository.save(transaction);
         log.info("Transaction completed successfully with ID: {}", savedTransaction.getId());
+
+        log.info("Sending notification...");
+        notificationService.sendNotification("Transaction completed successfully for Payee ID: " + payee.getId());
 
         return convertToDTO(savedTransaction);
     }
