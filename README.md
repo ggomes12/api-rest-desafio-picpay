@@ -46,7 +46,7 @@ The project follows a **layered architecture**, ensuring modularity and maintain
 
 ### 🏛️ Architecture Diagram  
 
-<img src="images/diagrama.PNG" alt="Project Structure" width="600"/>
+<img src="images/diagrama.png" alt="Project Structure" width="600"/>
 
 
 ---
@@ -212,38 +212,38 @@ Below are example test results using **Postman**.
     <td><strong>Post MERCHANT users</strong></td>
   </tr>
   <tr>
-    <td><img src="images/postman1.png" width="350"></td>
-    <td><img src="images/postman2.png" width="350"></td>
+    <td><img src="images/postman1.PNG" width="350"></td>
+    <td><img src="images/postman2.PNG" width="350"></td>
   </tr>
   <tr>
     <td><strong>Get all users</strong></td>
     <td><strong>Post wallet user COMMON</strong></td>
   </tr>
   <tr>
-    <td><img src="images/postman3.png" width="350"></td>
-    <td><img src="images/postman4.png" width="350"></td>
+    <td><img src="images/postman3.PNG" width="350"></td>
+    <td><img src="images/postman4.PNG" width="350"></td>
   </tr>
   <tr>
     <td><strong>Post wallet user MERCHANT</strong></td>
     <td><strong>Get all wallets</strong></td>
   </tr>
   <tr>
-    <td><img src="images/postman5.png" width="350"></td>
-    <td><img src="images/postman6.png" width="350"></td>
+    <td><img src="images/postman5.PNG" width="350"></td>
+    <td><img src="images/postman6.PNG" width="350"></td>
   </tr>
   <tr>
     <td><strong>Post transactions User COMMON to User MERCHANT</strong></td>
     <td><strong>Post transactions User MERCHANT to User COMMON</strong></td>
   </tr>
   <tr>
-    <td><img src="images/postman7.png" width="350"></td>
-    <td><img src="images/postman8.png" width="350"></td>
+    <td><img src="images/postman7.PNG" width="350"></td>
+    <td><img src="images/postman8.PNG" width="350"></td>
   </tr>
   <tr>
     <td><strong>Get all transactions</strong></td>
   </tr>
   <tr>
-    <td><img src="images/postman9.png" width="350"></td>
+    <td><img src="images/postman9.PNG" width="350"></td>
   </tr>
 </table>
 
