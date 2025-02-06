@@ -6,10 +6,11 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
@@ -42,15 +43,6 @@ public class GlobalExceptionHandler {
         return buildErrorResponse(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
     }
     
-    @ExceptionHandler(NotificationFailedException.class)
-    public ResponseEntity<Object> handleNotificationServiceException(NotificationFailedException ex) {
-        return buildErrorResponse(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
-    }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<Object> handleGenericException(Exception ex) {
-        return buildErrorResponse("An unexpected error occurred: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
 
     private ResponseEntity<Object> buildErrorResponse(String message, HttpStatus status) {
         Map<String, Object> body = new LinkedHashMap<>();
