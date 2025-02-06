@@ -1,5 +1,11 @@
 # 💰 PicPay Simplificado - Payment API
 
+Resolution of the Backend-br Challenge.
+
+You can access the GitHub repository for this project here:
+[Picpay-challenge](https://github.com/PicPay/picpay-desafio-backend)
+
+
 This is a simplified **payment platform** that allows users to deposit money and perform **money transfers** between accounts.
 
 ---
@@ -39,7 +45,9 @@ The project follows a **layered architecture**, ensuring modularity and maintain
 5. **Exception Handling** → Unified error management  
 
 ### 🏛️ Architecture Diagram  
-![Architecture](images/picpay-architecture.png)
+
+<img src="images/diagrama.PNG" alt="Project Structure" width="600"/>
+
 
 ---
 
@@ -72,6 +80,9 @@ The project follows a **layered architecture**, ensuring modularity and maintain
  ┃ ┃ ┃ ┣ 📂 exceptions
  ┃ ┃ ┣ 📂 resources
  ┃ ┃ ┃ ┗ 📂 db / migration
+ ┃ ┃ ┃ ┃  ┗ 📜 v1__create_users_table.sql
+ ┃ ┃ ┃ ┃  ┗ 📜 v2__create_wallets_table.sql
+ ┃ ┃ ┃ ┃  ┗ 📜 v3__create_transactions_table.sql
  ┃ ┃ ┃ ┗ 📜 application.properties
  ┣ 📜 pom.xml
  ┗ 📜 README.md
@@ -185,27 +196,57 @@ POST /transactions
 
 ---
 
-## <put icon postman> Postman
-**Testing post .... **
-![Swagger UI](images/postman1.png)
+## 📬 API Testing with Postman
 
-**Testing get all .... **
-![Swagger UI](images/postman2.png)
+🚀 **Testing Endpoints in Postman**  
+Below are example test results using **Postman**.
 
-**Testing get by id .... **
-![Swagger UI](images/postman3.png)
+## 📬 API Testing with Postman
 
-**Testing post wallet .... **
-![Swagger UI](images/postman4.png)
+🚀 **Testing Endpoints in Postman**  
+Below are example test results using **Postman**.
 
-**Testing wallet .... **
-![Swagger UI](images/postman5.png)
+<table>
+  <tr>
+    <td><strong>Post COMMON users</strong></td>
+    <td><strong>Post MERCHANT users</strong></td>
+  </tr>
+  <tr>
+    <td><img src="images/postman1.png" width="350"></td>
+    <td><img src="images/postman2.png" width="350"></td>
+  </tr>
+  <tr>
+    <td><strong>Get all users</strong></td>
+    <td><strong>Post wallet user COMMON</strong></td>
+  </tr>
+  <tr>
+    <td><img src="images/postman3.png" width="350"></td>
+    <td><img src="images/postman4.png" width="350"></td>
+  </tr>
+  <tr>
+    <td><strong>Post wallet user MERCHANT</strong></td>
+    <td><strong>Get all wallets</strong></td>
+  </tr>
+  <tr>
+    <td><img src="images/postman5.png" width="350"></td>
+    <td><img src="images/postman6.png" width="350"></td>
+  </tr>
+  <tr>
+    <td><strong>Post transactions User COMMON to User MERCHANT</strong></td>
+    <td><strong>Post transactions User MERCHANT to User COMMON</strong></td>
+  </tr>
+  <tr>
+    <td><img src="images/postman7.png" width="350"></td>
+    <td><img src="images/postman8.png" width="350"></td>
+  </tr>
+  <tr>
+    <td><strong>Get all transactions</strong></td>
+  </tr>
+  <tr>
+    <td><img src="images/postman9.png" width="350"></td>
+  </tr>
+</table>
 
-**Testing post transactions .... **
-![Swagger UI](images/postman6.png)
-
-**Testing post transactions .... **
-![Swagger UI](images/postman7.png)
 
 ---
 
@@ -234,9 +275,7 @@ The **Swagger UI** is available at:
 ## 🎯 Future Improvements
 
 🚀 **Enhancements for scalability & maintainability:**
-- ✅ **Implement Redis for caching**
 - ✅ **Migrate from H2 to PostgreSQL running on docker**
-- ✅ **Deploy on Kubernetes**
 - ✅ **Improve test coverage with JUnit & Mockito**
 - ✅ **Implement JWT authentication for security**
 
